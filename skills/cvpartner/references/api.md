@@ -11,6 +11,7 @@ Use the `cvp` helper from [`../scripts/cvp.js`](../scripts/cvp.js). It adds the 
 - **Version.** On PUT, include the entry's current `version` from a fresh read.
 - **Partial update.** PUT changes only the fields you send.
 - **Dates** are strings: `"month_from": "02", "year_from": "2026"`. Leave `year_to` empty for ongoing work.
+- **Own CV.** Writes go only to a CV whose `userId` matches the signed-in user (`current_user_id` from `/bootstrap`). The helper enforces this; see [connect.md](connect.md#own-cv-only).
 - **Batches.** Keep one evaluation to about twenty calls. Calls run one after another in the page, and a long batch can outlast the agent's timeout while it keeps running in the tab.
 - **Hidden entries.** Every entry has a `disabled` flag; `true` hides it from exports, and CV Partner shows it as "Will not be exported". The flag stays when you rename or reuse an entry, so when you repurpose one, check it and send `disabled: false` if the content should show. `cvp.audit()` lists hidden entries with content.
 

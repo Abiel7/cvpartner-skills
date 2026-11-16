@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "cvpartner",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Unofficial community plugin, not affiliated with CV Partner or Flowcase. Review, update and translate your CV in CV Partner (now Flowcase) with an AI agent, in English and your local language.",
   "author": {
     "name": "Abiel Kidane",

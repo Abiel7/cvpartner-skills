@@ -75,6 +75,7 @@ The agent always shows you the text before it saves anything, and it downloads a
 
 ### How the agent works
 
+- **Your CV only.** The agent reads and changes only the CV that belongs to you. If your browser shows a colleague's CV, for example while you look for inspiration, it stops and asks you to open your own.
 - **Facts first.** Everything it writes comes from what you confirmed or what it found in your documents, code or mail. It keeps those facts, each with its source, in `cv-work/facts.md` on your machine, so a later session does not ask you again.
 - **Written for the reader.** Each project says what the customer needed, what was delivered and what difference it made, in English and your local language, without clichés or implementation detail.
 - **Honest by design.** Every line must pass an interview test: could you explain it without backtracking? Lines that stretch the truth are flagged for you to keep, soften or drop.
@@ -94,7 +95,7 @@ Every item found this way is a lead. You confirm it before it goes in your CV.
 
 ### On a Mac with your normal Edge profile
 
-Mac users can let the agent work in their everyday Edge window instead of the plugin's browser. See *Option B* in [`connect.md`](skills/cvpartner/references/connect.md).
+Mac users can let the agent work in their everyday Edge window instead of the plugin's browser. See _Option B_ in [`connect.md`](skills/cvpartner/references/connect.md).
 
 ## Privacy
 
@@ -104,13 +105,13 @@ Mac users can let the agent work in their everyday Edge window instead of the pl
 
 ## Status
 
-| Agent | Tested |
-|---|---|
-| Claude Code | Plugin installs; the skill and the browser server load |
-| GitHub Copilot CLI | Plugin installs from the marketplace with its skill |
-| Codex | Plugin installs from the marketplace with its skill and browser server config |
-| `npx skills add` | Installs the skill for Codex, Copilot and Claude Code |
-| VS Code | Follows the VS Code documentation; not yet tried |
+| Agent              | Tested                                                                        |
+| ------------------ | ----------------------------------------------------------------------------- |
+| Claude Code        | Plugin installs; the skill and the browser server load                        |
+| GitHub Copilot CLI | Plugin installs from the marketplace with its skill                           |
+| Codex              | Plugin installs from the marketplace with its skill and browser server config |
+| `npx skills add`   | Installs the skill for Codex, Copilot and Claude Code                         |
+| VS Code            | Follows the VS Code documentation; not yet tried                              |
 
 The CV Partner requests and the `cvp.js` helper are tested against a live CV. Reports and fixes from other setups are welcome.
 
@@ -118,26 +119,26 @@ The CV Partner requests and the `cvp.js` helper are tested against a live CV. Re
 
 One plugin folder serves every agent:
 
-| Path | For |
-|---|---|
-| `skills/cvpartner/` | The skill: `SKILL.md`, references and the `cvp.js` page helper |
-| `plugin.json`, `mcp.json` | Portable [Agent Plugins](https://code.visualstudio.com/docs/agents/reference/agent-plugin-reference) manifest and browser server (Copilot, VS Code, Codex) |
-| `.claude-plugin/plugin.json`, `.mcp.json` | Claude Code manifest and browser server |
-| `.claude-plugin/marketplace.json` | Marketplace for Claude Code and VS Code |
-| `.github/plugin/marketplace.json` | Marketplace for GitHub Copilot CLI |
-| `.agents/plugins/marketplace.json` | Marketplace for Codex |
+| Path                                      | For                                                                                                                                                        |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `skills/cvpartner/`                       | The skill: `SKILL.md`, references and the `cvp.js` page helper                                                                                             |
+| `plugin.json`, `mcp.json`                 | Portable [Agent Plugins](https://code.visualstudio.com/docs/agents/reference/agent-plugin-reference) manifest and browser server (Copilot, VS Code, Codex) |
+| `.claude-plugin/plugin.json`, `.mcp.json` | Claude Code manifest and browser server                                                                                                                    |
+| `.claude-plugin/marketplace.json`         | Marketplace for Claude Code and VS Code                                                                                                                    |
+| `.github/plugin/marketplace.json`         | Marketplace for GitHub Copilot CLI                                                                                                                         |
+| `.agents/plugins/marketplace.json`        | Marketplace for Codex                                                                                                                                      |
 
 Inside the skill:
 
-| File | Contents |
-|---|---|
-| `SKILL.md` | The steps the agent follows |
-| `references/connect.md` | How the agent reaches CV Partner in the browser |
-| `references/api.md` | CV Partner requests and their gotchas |
-| `references/writing.md` | Writing style, with language-specific rules |
-| `references/evidence.md` | Finding facts, the facts file, and the Microsoft 365 Copilot prompts |
-| `references/tailoring.md` | Tailoring the CV for a bid or a role |
-| `scripts/cvp.js` | Helper the agent loads into the CV Partner page |
+| File                      | Contents                                                             |
+| ------------------------- | -------------------------------------------------------------------- |
+| `SKILL.md`                | The steps the agent follows                                          |
+| `references/connect.md`   | How the agent reaches CV Partner in the browser                      |
+| `references/api.md`       | CV Partner requests and their gotchas                                |
+| `references/writing.md`   | Writing style, with language-specific rules                          |
+| `references/evidence.md`  | Finding facts, the facts file, and the Microsoft 365 Copilot prompts |
+| `references/tailoring.md` | Tailoring the CV for a bid or a role                                 |
+| `scripts/cvp.js`          | Helper the agent loads into the CV Partner page                      |
 
 ## Contributing
 
@@ -155,7 +156,6 @@ Test changes with the read-only calls `cvp.summary()`, `cvp.audit()`, `cvp.lint(
 - **Edge opens but CV Partner asks you to sign in again.** Close every Edge window the agent opened and try again; the saved profile can only be used by one window at a time.
 - **A save returns 401 or 422.** The session or its security token expired. Reload the CV Partner page, sign in, and ask the agent to load the helper again.
 - **Something saved twice.** Ask the agent to run the audit; it finds duplicate roles and skills and can remove them.
-
 
 ## Trademarks and affiliation
 

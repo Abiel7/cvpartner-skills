@@ -6,9 +6,10 @@ The examples below are invented to show the pattern. Their numbers are illustrat
 
 ## House style and the user's voice
 
-Ask once whether the user's company has CV guidelines: first or third person, tense, length, required sections. Those win over this guide. Then:
+Before writing, find the company's CV convention: ask the user, or ask them to open a colleague's CV as an example. Many consultancies write CVs in the third person with the consultant's first name ("Kari er…", "Kari is…"), and that convention wins over this guide. Then:
 
-- Keep one person and one tense across the whole CV. Without a house rule, use the subject-less past tense shown below ("Designed…", "Led…").
+- Keep one person and one tense across the whole CV. Bullets without a subject ("Designed…", "Led…") fit a third-person CV.
+- Use the consultant's name rather than a pronoun unless the user tells you which pronoun to use.
 - Keep words the user already reaches for in their CV and notes, and avoid introducing words they never use. A CV that sounds like its owner survives the interview.
 
 ## Accuracy first
@@ -20,13 +21,21 @@ Ask once whether the user's company has CV guidelines: first or third person, te
 
 ## Profile summary
 
-Three or four lines. A reader who stops after them knows the consultant's role, their strongest domain or technology, and one concrete result. _Demonstrate, don't state_: replace "strong team player" with what the team achieved.
+The profile tells the reader what kind of consultant this is and what they work with. Customers and projects already have their own section, so the profile names none of them.
 
-CV Partner can hold several profile texts, each with a label. A consultant who bids for different kinds of roles keeps one per kind ("Integration architect", "Microsoft 365 developer"); see [tailoring.md](tailoring.md).
+Two or three sentences, in the house style:
 
-> **Before:** Passionate and results-driven developer with a proven track record of delivering robust, innovative solutions in fast-paced environments.
+1. **Who.** Role and seniority, and how the consultant works with customers.
+2. **What.** The areas of experience, broadest first: platforms, kinds of solutions, how the work has developed.
+3. **How.** Two or three working traits the CV backs up, such as learning new domains quickly or explaining technical choices plainly.
+
+> **Before:** Passionate, proactive and results-driven developer with a proven track record of delivering robust, innovative solutions for leading companies in fast-paced environments.
 >
-> **After:** Senior developer who builds integrations between business systems on Azure. Recent work cut a logistics customer's daily route planning from hours to minutes. Takes solutions from first workshop to production and trains the people who use them.
+> **After:** Kari is a senior developer and architect who works closely with customers and takes ownership of a solution from the first idea until it runs in production. Broad experience with integration and data platforms in the cloud, from reporting to automation. Quick to learn new business domains and explains technical choices in plain terms.
+
+Only use a trait the CV supports: "works closely with customers" needs projects where the consultant did, "shares knowledge" needs mentoring, talks or advising. Personality words a reader cannot check (proactive, dynamic, energetic, passionate) say nothing.
+
+CV Partner can hold several profile texts, each with a label. A consultant who bids for different kinds of roles can keep one per kind; see [tailoring.md](tailoring.md).
 
 ## Project description
 
@@ -130,7 +139,7 @@ Before showing drafts to the user, run `cvp.lint()` on them for the mechanical c
 - Every claim, number and date traces to a confirmed line in the facts file; stretches are flagged with their reason.
 - The text follows the house style and keeps one person and tense throughout.
 - `cvp.lint()` reports nothing, or only lines you have checked and can explain (a "helped" that is true, for example).
-- The profile summary's first lines name the role, the strongest domain and one result.
+- The profile names role, areas and backed-up traits, and no customers or projects.
 - Each project text gives need, delivery and value; each role text opens with role and scope.
 - No implementation detail in project or role text; technologies sit in the skills list.
 - The verbs match the ownership the facts file records.

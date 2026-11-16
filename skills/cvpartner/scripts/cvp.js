@@ -4,7 +4,7 @@
   // synchronous so the same file works with Playwright MCP (browser_evaluate) and with macOS AppleScript.
   // Text fields hold one value per language: `int` is English, plus one local language (no, se, dk, fi, ...).
   const m = location.hash.match(/\/cv\/([0-9a-f]{24})\/([0-9a-f]{24})/);
-  const state = { ids: m ? { userId: m[1], cvId: m[2] } : null, csrf: null, local: null };
+  const state = { ids: m ? { userId: m[1], cvId: m[2] } : null, csrf: null, me: null, local: null, allowOther: false };
 
   function xhr(method, url, body, headers) {
     const x = new XMLHttpRequest();
@@ -18,9 +18,15 @@
     return { status: x.status, data };
   }
   function csrf(refresh) {
-    if (!state.csrf || refresh) state.csrf = xhr('GET', '/bootstrap').data.csrf_token;
+    if (!state.csrf || refresh) {
+      const b = xhr('GET', '/bootstrap').data;
+      state.csrf = b.csrf_token; state.me = b.current_user_id;
+    }
     return state.csrf;
   }
+  // The signed-in user's id. A CV belongs to them when its userId matches.
+  function me() { if (!state.me) csrf(true); return state.me; }
+  const isOwn = () => !!state.ids && state.ids.userId === me();
   function base() {
     if (!state.ids) throw new Error('No CV selected. Open your CV in CV Partner or call cvp.use(userId, cvId).');
     return `/api/v3/cvs/${state.ids.userId}/${state.ids.cvId}`;
@@ -28,6 +34,10 @@
   function req(method, path, body) {
     const url = path.startsWith('/') ? path : `${base()}${path ? '/' + path : ''}`;
     if (method === 'GET') return xhr('GET', url);
+    // Write only to the signed-in user's own CV. The tab may show a colleague's CV the user is just reading.
+    if (!path.startsWith('/') && !isOwn() && !state.allowOther) {
+      throw new Error("This CV belongs to someone else, so nothing was written. Open your own CV and load cvp again, or call cvp.use(userId, cvId) with your own CV's ids.");
+    }
     let r = xhr(method, url, body, { 'X-CSRF-Token': csrf() });
     if (r.status === 401 || r.status === 422) r = xhr(method, url, body, { 'X-CSRF-Token': csrf(true) });
     return r;
@@ -54,7 +64,10 @@
   const cvp = {
     get ids() { return state.ids; },
     get local() { return state.local; },
-    use(userId, cvId) { state.ids = { userId, cvId }; return base(); },
+    use(userId, cvId) { state.ids = { userId, cvId }; state.local = null; return base(); },
+    get isOwn() { return isOwn(); },
+    // Only when the user explicitly asks to edit a CV they are responsible for, such as a team member's.
+    allowOtherCv(on) { state.allowOther = !!on; return state.allowOther; },
     setLocal(code) { state.local = code; return code; },
     req,
     get: (p) => req('GET', p || ''),
@@ -174,7 +187,7 @@
         (c.presentations || []).forEach((x) => add(`Presentation ${t(x.description)}`, x.long_description));
       }
       const R = {
-        cliche: /\b(passionate|results[- ]driven|results[- ]oriented|proven track record|leverag\w*|utili[sz]\w*|spearhead\w*|orchestrat\w*|champion(ed|ing)|synerg\w*|robust|seamless\w*|cutting[- ]edge|innovative|best practices?|pivotal|significant impact|fast[- ]paced|team player|go[- ]getter|lidenskapelig|brenner for|resultatorientert|synergi\w*|banebrytende|sømløs\w*|innovativ\w*|beste praksis|passionerad|resultatinriktad|banbrytande|sömlös\w*|passioneret|resultatorienteret|banebrydende)\b/gi,
+        cliche: /\b(passionate|results[- ]driven|results[- ]oriented|proven track record|leverag\w*|utili[sz]\w*|spearhead\w*|orchestrat\w*|champion(ed|ing)|synerg\w*|robust|seamless\w*|cutting[- ]edge|innovative|best practices?|pivotal|significant impact|fast[- ]paced|team player|go[- ]getter|proactive|dynamic|energetic|hard[- ]working|self[- ]motivated|detail[- ]oriented|proaktiv|dynamisk|energisk|arbeidsom|selvgående|lidenskapelig|brenner for|resultatorientert|synergi\w*|banebrytende|sømløs\w*|innovativ\w*|beste praksis|passionerad|resultatinriktad|banbrytande|sömlös\w*|passioneret|resultatorienteret|banebrydende)\b/gi,
         first: /\b(me|my|mine|jeg|meg|min|mitt|jag|mig)\b/gi, // plus a capital "I", checked separately: Norwegian "i" means "in"
         status: /\b(pilot|currently|on its way|in progress|phase \d+ (starts|will)|foreløpig|på vei mot|pågående|piloten|for närvarande|på väg mot)\b/gi,
         time: /(\d+\s?%\s?of (my|the) time|on and off|av og på|av och på|af og til)/gi,
@@ -248,6 +261,7 @@
   };
   window.cvp = cvp;
   if (!state.ids) return 'cvp loaded. Open your own CV in CV Partner, then load cvp again (or call cvp.use(userId, cvId)).';
+  if (!isOwn()) return "cvp loaded, but this tab shows someone else's CV. It was not read. Ask the user to open their own CV (their name, then CV) and load cvp again.";
   cvp.cv();
   return `cvp ready for CV ${state.ids.userId}/${state.ids.cvId}, languages: English (int) + ${state.local}`;
 }

@@ -27,7 +27,7 @@ A gap stays a gap. Tell the user, name the nearest real experience, and let them
 
 ## 4. Lead with the fit
 
-- **Profile.** A reader who stops after three lines sees the role asked for, the closest matching domain or technology, and one result. CV Partner can hold several profile texts with labels, so keep one per kind of role ("Integration architect", "Microsoft 365 developer") and pick or adapt the right one.
+- **Profile.** A reader who stops after the profile sees the role asked for and the matching areas of experience. CV Partner can hold several profile texts with labels, so keep one per kind of role ("Integration architect", "Microsoft 365 developer") and pick or adapt the right one. The projects that prove the fit go first in the project list, not into the profile.
 - **The customer's terms.** Use the request's word when it truthfully describes the work. Readers and search tools match words literally, so "integration platform" beats a paraphrase. Apply the interview test to every reworded line.
 - **Order.** Put the most relevant projects, skills and certifications first.
 

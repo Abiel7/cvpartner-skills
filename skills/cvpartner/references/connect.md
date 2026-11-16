@@ -14,6 +14,12 @@ Installed as a plugin, this skill brings a `playwright` MCP server that opens Mi
 
 The helper lives on the page. After the tab reloads or navigates, load `cvp.js` again.
 
+### Own CV only
+
+The helper takes the CV from the address the tab shows and checks it against the signed-in user. When the tab shows someone else's CV, it says so, reads nothing, and refuses every write. Users often browse colleagues' CVs for inspiration, so this is normal: ask the user to open their own CV and load the helper again, or call `cvp.use(userId, cvId)` with the ids from their own CV's address.
+
+Call `cvp.allowOtherCv(true)` only when the user explicitly asks you to edit a CV they are responsible for, such as a team member's, and CV Partner grants them access.
+
 ### When the browser tools are missing
 
 The skill was installed without its plugin (for example with `npx skills add`), or the server has not started. Tell the user to add the server once, with the command for their agent, then restart the agent:
