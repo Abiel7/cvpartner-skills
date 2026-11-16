@@ -1,0 +1,34 @@
+{
+  "name": "cvpartner",
+  "owner": {
+    "name": "Abiel Kidane",
+    "url": "https://github.com/Abiel7"
+  },
+  "metadata": {
+    "description": "Unofficial community plugin, not affiliated with CV Partner or Flowcase. Review, update and translate your CV in CV Partner (now Flowcase) with an AI agent, in English and your local language."
+  },
+  "plugins": [
+    {
+      "name": "cvpartner",
+      "source": "./",
+      "description": "Unofficial community plugin, not affiliated with CV Partner or Flowcase. Review, update and translate your CV in CV Partner (now Flowcase) with an AI agent, in English and your local language.",
+      "version": "0.4.1",
+      "author": {
+        "name": "Abiel Kidane",
+        "url": "https://github.com/Abiel7"
+      },
+      "homepage": "https://github.com/Abiel7/cvpartner-skills",
+      "license": "MIT",
+      "keywords": [
+        "cvpartner",
+        "cv-partner",
+        "flowcase",
+        "cv",
+        "resume",
+        "consultant",
+        "agent-skills"
+      ],
+      "category": "productivity"
+    }
+  ]
+}

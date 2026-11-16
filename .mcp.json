@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "msedge",
+        "--user-data-dir",
+        "${CLAUDE_PLUGIN_DATA}/browser-profile"
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "cvpartner",
+  "interface": {
+    "displayName": "CV Partner (unofficial)"
+  },
+  "plugins": [
+    {
+      "name": "cvpartner",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
